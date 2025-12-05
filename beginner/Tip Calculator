@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+int main (void)
+{
+
+// Tip calculator
+
+float bill;
+float tip;
+float totalBill;
+
+printf("Please enter the bill amount: ");
+scanf("%f", &bill);
+
+printf("What percentage would you like to tip?: ");
+scanf("%f", &tip);
+
+tip = (tip / 100) * bill;
+totalBill = bill + tip;
+
+printf("The total bill including the tip is: %.2f\n", totalBill);
+
+return 0;
+
+}
