@@ -1,0 +1,20 @@
+#include <stdio.h>
+
+int main (void)
+{
+
+// Convert Miles to kilometers
+
+double miles;
+double kilometers;
+
+printf("Please enter your cars mileage in miles: ");
+scanf("%lf", &miles);
+
+kilometers = miles * 1.60934;
+
+printf("Your cars mileage in kilometers is %.2f/n", kilometers);
+return 0;
+
+
+}
