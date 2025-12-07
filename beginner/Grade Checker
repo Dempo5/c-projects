@@ -1,0 +1,37 @@
+#include <stdio.h>
+
+int main() {
+
+int n;
+
+// Prompt user for a number between 0 and 100
+printf(" Give me a number between 0 and 100: ");
+scanf("%d", &n);
+
+// Determine the letter grade based on the number
+if(n>=90) {
+printf("You scored a A!\n");
+
+} else {
+if(n>=80) {
+printf("You scored a B!\n");
+
+} else {
+if(n>=70) {
+printf("You scored a C!\n");
+
+} else {
+if(n>=60) {
+printf("You scored a D!\n");
+
+} else {
+printf("you scored an F\n");
+
+}
+}
+}
+}
+return 0;
+}
+
+   
