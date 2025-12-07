@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+
+//declare variables    
+char inputUsername[20];
+int inputPassword;   
+
+//preset username and password
+char username[20] = "admin";
+int password = 12345;
+
+//get user input
+printf("please enter the username: ");
+scanf("%s", inputUsername);
+printf("please enter the password: ");
+scanf("%d", &inputPassword);
+
+//check credentials
+if(strcmp(inputUsername, username) == 0 && inputPassword == password) {
+
+printf("log in successful\n");
+
+} else {
+printf("Access denied\n");
+}   
+return 0;
+}
