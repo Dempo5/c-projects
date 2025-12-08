@@ -8,9 +8,11 @@ int n = 1;
 int guess;
 int value;
 
+// Generate randome number ranging from 1 to 100
 srand(time(NULL));
 value = rand() % 100 + 1;
 
+//Max amount of guesses is 10
 for(n=1; n<= 10; n++) {
     
     
