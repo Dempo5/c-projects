@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main() {
+
+int n = 1;
+int guess;
+int value;
+
+srand(time(NULL));
+value = rand() % 100 + 1;
+
+for(n=1; n<= 10; n++) {
+    
+    
+printf("Guess a random number between 1 and 100:\n");
+scanf("%d", &guess);
+
+if(guess == value) {
+    printf("Correct!");
+    break;
+}
+
+if(guess!= value) {
+    printf("nice try,");
+}
+
+if(guess > value) {
+    printf(" too high!\n");
+} else {
+    printf(" too low!\n");
+} 
+
+if(n == 10) {
+    printf("Out of guesses!");
+}
+
+}
+
+    return 0;  
+}                      
