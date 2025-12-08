@@ -1,0 +1,77 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+
+int choice;
+
+// Menu
+
+printf("Welcome To My Menu Program\n\n");
+
+printf("1. Add two numbers\n");
+printf("2. Subtract two numbers\n");
+printf("3. Quit\n");
+
+printf("Enter your choice: \n");
+scanf("%d", &choice);
+
+while (choice > 0 && choice < 4) {
+switch (choice) {
+   
+int a, b;
+int result;
+
+case 1:
+printf("Enter first number: ");
+scanf("%d", &a);
+printf("Enter second number: ");
+scanf("%d", &b);
+
+result = a + b;
+
+printf("The sum of %d and %d is %d\n\n\n", a, b, result);
+
+break;
+
+case 2:
+printf("Enter first number: ");
+scanf("%d", &a);
+printf("Enter second number: ");
+scanf("%d", &b);
+
+result = a - b;
+
+printf("The sum of %d and %d is %d\n\n\n", a, b, result);
+
+break;
+
+case 3:
+    printf("Goodbye!\n");
+    return 0;    
+
+}
+
+printf("Menu \n\n");
+printf("1. Add two numbers\n");
+printf("2. Subtract two numbers\n");
+printf("3. Quit\n");
+printf("Enter your choice: \n");
+scanf("%d", &choice);
+
+if(choice < 0 ) {
+    printf("Invalid choice. Type 1, 2, or 3\n");
+    break;
+}
+
+if(choice > 3 ) {
+    printf("Invalid choice. Type 1, 2, or 3\n");
+    break;
+
+}
+
+}
+
+return 0;
+
+}
