@@ -34,9 +34,9 @@ gcc filename.c -o program
 - [x] Variables and input/output  
 - [x] Conditionals  
 - [x] Loops  
-- [ ] Functions  
-- [ ] Arrays  
-- [ ] Strings  
+- [x] Functions  
+- [x] Arrays  
+- [x] Strings  
 - [ ] Pointers  
 - [ ] Data structures  
 - [ ] Algorithms  
