@@ -1,0 +1,61 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+
+    int a;
+    int b;
+    
+    
+
+char choice;
+choice = 'x';
+
+while (choice != 'd') {
+
+printf("Please enter two numbers\n\n");
+
+//lets the user enter two numbers
+printf("enter number one: ");
+scanf("%d", &a);
+
+printf("Enter number two: ");
+scanf("%d", &b);
+
+
+printf("Would you like to add, subtract, multiply, or divide?: \n");
+
+//lets the user choose the operator
+printf("Enter the operator you would like to use or type d to quit (+, -, *, /)\n");
+scanf(" %c", &choice);
+
+if(choice == 'd') {
+    printf("Goodbye!\n");
+    break;
+}
+
+switch(choice) {
+
+
+    case '+':
+    printf("%d + %d = %d\n", a, b, a + b);
+    break;
+
+    case '-':
+    printf("%d - %d = %d\n", a, b, a - b);
+    break;
+
+    case '*':
+    printf("%d * %d = %d\n", a, b, a * b);
+    break;
+
+    case '/':
+    printf("%d / %d = %d\n", a, b, a / b);
+    break;
+
+}
+
+printf("\n");
+}
+    return 0;
+}                      
