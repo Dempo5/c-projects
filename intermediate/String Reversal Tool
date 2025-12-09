@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <string.h>
+
+int main () {
+
+char word[101];
+char reversed[101];
+int len = 0;
+
+printf("Type in a word or sentence: ");
+scanf("%s", word);
+
+while (word[len] != '\0') {
+        len++;
+    }
+
+for(int i = 0; i < len; i++) {
+    reversed[i] = word[len - 1 - i];
+}
+
+reversed[len] = '\0';
+
+printf("%s", reversed);
+
+
+return 0;
+}
