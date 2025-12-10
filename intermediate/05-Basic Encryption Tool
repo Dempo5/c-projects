@@ -1,0 +1,93 @@
+#include <stdio.h>
+
+int main () {
+
+char message[200];
+char result[200];
+int shift;
+int choice;
+
+choice = 0;
+shift = 0;
+
+while (choice != 3) {
+
+printf("1. Encrypt a message\n");
+printf("2. Decrypt a message\n");
+printf("3. Quit\n");
+printf("Choose an option: ");
+scanf("%d", &choice);
+
+switch(choice) {
+
+case 1: {
+    printf("Enter a shift value(Ex. 3 or 5): \n");
+    scanf("%d", &shift);
+    getchar(); // clean leftover newline
+
+    printf("Enter a message you would like to encrypt: \n");
+    fgets(message, sizeof(message), stdin);
+
+    int i = 0;
+
+    for (i = 0; message[i] != '\0'; i++) {
+        char c = message[i];
+
+        if (c >= 'a' && c <= 'z') {
+            c = (c - 'a' + shift + 26) % 26 + 'a';
+        } else if (c >= 'A' && c <= 'Z') {
+            c = (c - 'A' + shift + 26) % 26 + 'A';
+        }
+
+        result[i] = c;
+    }
+
+    result[i] = '\0';   // end the string
+
+    printf("Encrypted message: %s\n", result);
+    break;
+   }
+   case 2: {
+    printf("Enter a shift value(Ex. 3 or 5): \n");
+    scanf("%d", &shift);
+    getchar(); // clean leftover newline
+
+    printf("Enter a message you would like to Decrypt: \n");
+    fgets(message, sizeof(message), stdin);
+
+    int i = 0;
+
+    for (i = 0; message[i] != '\0'; i++) {
+        char c = message[i];
+
+        if (c >= 'a' && c <= 'z') {
+            c = (c - 'a' - shift + 26) % 26 + 'a';
+        } else if (c >= 'A' && c <= 'Z') {
+            c = (c - 'A' - shift + 26) % 26 + 'A';
+        }
+
+        result[i] = c;
+    }
+
+    result[i] = '\0';   // end the string
+
+    printf("Encrypted message: %s\n", result);
+    break;
+   }
+   
+   case 3: {
+       printf("Goodbye!\n");
+       break;
+   }
+    
+        default: {
+    
+    printf("Invalid input... Try again\n\n");
+    break;
+}
+}
+
+}
+
+return 0;
+}
