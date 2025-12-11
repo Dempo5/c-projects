@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main(void) {
+    int numbers[6];
+    char choice = 'y';
+
+    // seed the RNG once
+    srand(time(NULL));
+
+    while (choice == 'y' || choice == 'Y') {
+        // fill the array with 6 UNIQUE random numbers (1–49)
+        for (int i = 0; i < 6; i++) {
+            int random_number;
+            int duplicate;
+
+            do {
+                random_number = rand() % 49 + 1;  // 1–49
+                duplicate = 0;                    // assume it's unique
+
+                // check previous numbers for duplicates
+                for (int j = 0; j < i; j++) {
+                    if (numbers[j] == random_number) {
+                        duplicate = 1;            // found a match
+                        break;
+                    }
+                }
+            } while (duplicate == 1);  // if duplicate, try a new random number
+
+            numbers[i] = random_number; // store the unique number
+        }
+
+        // print the 6 numbers nicely
+        printf("Your lottery numbers are: ");
+        for (int i = 0; i < 6; i++) {
+            printf("%d ", numbers[i]);
+        }
+        printf("\n");
+
+        // ask if they want to generate again
+        printf("\nGenerate another set? (y/n): ");
+        scanf(" %c", &choice);
+    }
+
+    printf("Good luck!\n");
+    return 0;
+}
+
+
