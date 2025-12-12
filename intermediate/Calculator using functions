@@ -1,0 +1,86 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int add(int a, int b) {
+  return a + b;
+}
+int sub(int a, int b) {
+  return a - b;
+}
+int multiply(int a, int b) {
+  return a * b;
+}
+int divide(int a, int b) {
+  return a / b;
+}
+
+
+int main () {
+  
+  int result;
+  int a, b;
+  int choice = 0;
+
+while (choice != 5)  {  
+printf("What would you like to do?\n\n");
+
+printf("1. add\n");
+printf("2. subtract\n");
+printf("3. multiply\n");
+printf("4. divide\n");
+printf("5. Quit\n");
+printf("Choose an option: ");
+scanf("%d", &choice);
+
+switch(choice) {
+
+case 1: 
+printf("Enter two numbers you would like to add\n");
+scanf("%d", &a);
+printf("Now enter the second number: \n");
+scanf("%d", &b);
+result = add(a, b);
+printf("%d + %d = %d\n\n",a, b, result);
+
+break;
+
+case 2:
+printf("Enter two numbers you would like to subtract\n");
+scanf("%d", &a);
+printf("Now enter the second number: \n");
+scanf("%d", &b);
+result = sub(a, b);
+printf("%d - %d = %d\n\n",a, b, result);
+
+break;
+
+case 3:
+printf("Enter two numbers you would like to multiply\n");
+scanf("%d", &a);
+printf("Now enter the second number: \n");
+scanf("%d", &b);
+result = multiply(a, b);
+printf("%d * %d = %d\n\n",a, b, result);
+
+break;
+
+case 4:
+printf("Enter two numbers you would like to divide\n");
+scanf("%d", &a);
+printf("Now enter the second number: \n");
+scanf("%d", &b);
+result = divide(a, b);
+printf("%d / %d = %d\n\n",a, b, result);
+
+break;
+
+case 5:
+printf("Goodbye!");
+break;
+
+}
+
+}
+return 0;
+}
