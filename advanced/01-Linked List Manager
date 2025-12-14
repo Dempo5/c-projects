@@ -1,0 +1,123 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node *next;
+};
+
+
+struct Node* insertNode(struct Node *head, int value);
+struct Node* deleteNode(struct Node *head, int value) {
+    if (head == NULL) {
+        printf("List is empty\n");
+        return head;
+    }
+
+   
+    if (head->data == value) {
+        struct Node *temp = head;
+        head = head->next;
+        free(temp);
+        return head;
+    }
+
+   
+    struct Node *prev = head;
+    struct Node *current = head->next;
+
+    while (current != NULL) {
+        if (current->data == value) {
+            prev->next = current->next;  
+            free(current);               
+            return head;
+        }
+        prev = current;
+        current = current->next;
+    }
+
+    printf("Value not found\n");
+    return head;
+}
+
+
+void printList(struct Node *head);
+void freeList(struct Node *head);
+void printList(struct Node *head) {
+    if (head == NULL) {
+        printf("List is empty\n");
+        return;
+    }
+
+    struct Node *current = head;
+    while (current != NULL) {
+        printf("%d ", current->data);
+        current = current->next;
+    }
+    printf("\n");
+}
+
+void freeList(struct Node *head) {
+    struct Node *temp;
+    while (head != NULL) {
+        temp = head;
+        head = head->next;
+        free(temp);
+    }
+}
+
+
+int main() {
+    struct Node *head = NULL;
+    int choice;
+    int value;
+
+while(1) {
+
+printf("Welcome to the linked list manager!\n\n");
+printf("1. Insert a value\n");
+printf("2. Delete a value\n");
+printf("3. Display the list\n");
+printf("4. Exit\n");
+printf("Select an option: ");
+scanf("%d", &choice);
+
+switch(choice) {
+
+case 1: 
+printf("Enter value to insert: ");
+scanf("%d", &value);
+
+  struct Node *newNode = malloc(sizeof(struct Node));
+    if (newNode == NULL) {
+        return 1;
+    }
+    newNode->data = value;
+    newNode->next = head;
+    head = newNode;
+
+break;
+
+
+case 2:
+
+printf("Enter value to delete: ");
+scanf("%d", &value);
+head = deleteNode(head, value);
+break;
+
+case 3:
+
+printList(head);
+break;
+
+case 4:
+
+freeList(head);
+return 0;
+
+}
+
+}
+return 0;
+}
