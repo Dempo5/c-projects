@@ -38,7 +38,7 @@ gcc filename.c -o program
 - [x] Arrays  
 - [x] Strings  
 - [x] Pointers  
-- [ ] Data structures  
+- [x] Data structures  
 - [ ] Algorithms  
 
 ---
