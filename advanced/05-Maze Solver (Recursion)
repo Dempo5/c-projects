@@ -1,0 +1,95 @@
+#include <stdbool.h>
+#include <stdio.h>
+
+#define ROWS 5
+#define COLS 4
+
+char maze[ROWS][COLS] = {
+    {'S', '.', '#', '.'},
+    {'#', '.', '#', '#'},
+    {'.', '.', '.', '#'},
+    {'.', '#', '.', '#'},
+    {'#', '#', '.', 'E'}
+};
+
+bool solve(int r, int c) {
+
+   // out of bounds?
+    if (r < 0 || r >= ROWS || c < 0 || c >= COLS) {
+        return false;
+    }
+
+    // 2) Hit a wall or already visited?
+    if (maze[r][c] == '#' || maze[r][c] == 'x' || maze[r][c] == '*') {
+        return false;
+    } 
+
+    // 3) Found the exit?
+    if (maze[r][c] == 'E') {
+        return true;
+    }
+
+    // 4) Mark current cell as part of the path (or visited)
+    if (maze[r][c] != 'S') {          // don’t overwrite start
+        maze[r][c] = '*';
+    }
+
+    // 5) Try all directions (DFS)
+    if (solve(r-1, c) == true) {     // up
+        return true;
+    }
+    if (solve(r+1, c) == true) {      // down
+        return true;
+    }
+    if (solve(r, c-1) == true) {     // left
+        
+        return true;
+    }
+    if (solve(r, c+1) == true) {      // right
+        return true;
+    }
+
+    // 6) If none worked, this is a dead end → backtrack
+    if (maze[r][c] != 'S') maze[r][c] = 'X';
+    return 0;
+}
+
+void printMaze(void) {
+    for (int r = 0; r < ROWS; r++) {
+        for (int c = 0; c < COLS; c++) {
+            printf("%c ", maze[r][c]);
+        }
+        printf("\n");
+    }
+}
+
+
+int main() {
+    int sr = -1, sc = -1;
+
+    for (int r = 0; r < ROWS; r++) {
+        for (int c = 0; c < COLS; c++) {
+            if (maze[r][c] == 'S') {
+                sr = r; sc = c;
+            }
+        }
+    }
+
+    if (sr == -1) {
+        printf("No start 'S' found.\n");
+        return 0;
+    }
+
+    printf("Original maze:\n");
+    printMaze();
+
+    if (solve(sr, sc)) {
+        printf("\nSolved maze:\n");
+        printMaze();
+    } else {
+        printf("\nNo path found.\n");
+        printMaze();
+    }
+
+    return 0;
+}
