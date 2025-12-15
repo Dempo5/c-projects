@@ -1,0 +1,298 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+
+void swap(int *a, int *b) {
+int temp = *a;
+*a = *b;
+*b = temp;
+}
+
+void bubbleSort(int num[], int n) {
+    for(int i = 0; i < n - 1; i++) {
+        int swapped = 0;
+        for(int j = 0; j < n - i - 1; j++) {
+            if (num[j] > num[j + 1]) {
+            swap(&num[j], &num[j + 1]);
+            swapped = 1;
+            }
+        }
+        if (!swapped) break;
+    }
+} 
+
+void printArray(int num[], int n) {
+    for(int i = 0; i < n; i++) {
+        printf("%d ", num[i]);
+    }
+    printf("\n");
+}
+
+
+int partition(int num[], int low, int high) {
+    int pivot = num[high];
+    int i = (low - 1);
+    for (int j = low; j <= high - 1; j++) {
+        if(num[j] <= pivot) {
+            i++;
+            swap(&num[i], &num[j]);
+        }
+    }
+    swap(&num[i + 1], &num[high]);
+    return(i + 1);
+}
+
+void quickSort(int num[], int low, int high) {
+    if (low < high) {
+        int pi = partition(num, low, high);
+        quickSort(num, low, pi - 1);
+        quickSort(num, pi + 1, high);
+
+    }
+}
+
+
+void merge(int num[], int left, int mid, int right) {
+int n1 = mid - left + 1, n2 = right - mid;
+int L[n1], R[n2];
+for (int i = 0; i < n1; i++) L[i] = num[left + i];
+for (int j = 0; j < n2; j++) R[j] = num[mid + 1 + j];
+
+int i = 0, j = 0, k = left;
+while (i < n1 && j < n2)
+num[k++] = (L[i] <= R[j]) ? L[i++] : R[j++];
+while (i < n1) num[k++] = L[i++];
+while (j < n2) num[k++] = R[j++];
+}
+
+void mergeSort(int num[], int left, int right) {
+if (left < right) {
+int mid = left + (right - left) / 2;
+mergeSort(num, left, mid);
+mergeSort(num, mid + 1, right);
+merge(num, left, mid, right);
+}
+}
+
+
+void insertionSort(int num[], int n) {
+    for (int i = 1; i < n; i++) {
+        int temp = num[i];
+        int j = i - 1;
+
+        while (j >= 0 && num[j] > temp) {
+            num[j + 1] = num[j];
+            j--;
+        }
+        num[j + 1] = temp;
+    }
+}
+
+
+void selectionSort(int num[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+         int min_idx = i;
+         for (int j = i + 1; j < n; j++) {
+            if(num[j] < num[min_idx]) {
+                min_idx = j;
+            }
+         }
+         int temp = num[min_idx];
+         num[min_idx] = num[i];
+         num[i] = temp;
+    }
+}
+
+
+void heapify(int num[], int n, int i) {
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+
+
+    if (left < n && num[left] > num[largest])
+        largest = left;
+
+    
+    if (right < n && num[right] > num[largest])
+        largest = right;
+
+    
+    if (largest != i) {
+        int temp = num[i];
+        num[i] = num[largest];
+        num[largest] = temp;
+
+        
+        heapify(num, n, largest);
+    }
+}
+
+void heapSort(int num[], int n) {
+    for (int i = n / 2 - 1; i >= 0; i--)
+        heapify(num, n, i);
+    for (int i = n - 1; i >= 0; i--) {
+        int temp = num[0];
+        num[0] = num[i];
+        num[i] = temp;
+
+        heapify(num, i, 0);
+    }
+}
+
+int main() {
+
+    int n;
+    int i;
+    int choice = 0;
+    clock_t start, end;
+    double time_taken;
+    int num[6];
+    int original[6];
+
+    printf("Enter 6 numbers:\n");
+    for (i = 0; i < 6; i++) {
+        scanf("%d", &original[i]);
+    }
+
+while (choice != 7) {
+
+printf("Choose sorting algorithm:\n");
+printf("1. Bubble Sort\n");
+printf("2. quick Sort\n");
+printf("3. Merge Sort\n");
+printf("4. Insertion Sort\n");
+printf("5. Selection Sort\n");
+printf("6. Heap Sort\n");
+printf("7. Exit\n");
+printf("Enter your choice: ");
+scanf("%d", &choice);
+
+for (i = 0; i < 6; i++) {
+    num[i] = original[i];
+}
+
+switch(choice) {
+
+case 1:{
+
+n = sizeof(num) / sizeof(num[0]);
+printf("Original array: ");
+printArray(num, n);
+
+start = clock();
+bubbleSort(num, n);
+end = clock();
+time_taken = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+printf("Sorted array: ");
+printArray(num, n);
+printf("Time taken: %f seconds\n", time_taken);
+
+break;
+
+}
+
+case 2:
+
+n = sizeof(num) / sizeof(num[0]);
+printf("Original array: ");
+printArray(num, n);
+
+start = clock();
+quickSort(num, 0, n - 1);
+end = clock();
+time_taken = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+printf("Sorted array: ");
+printArray(num, n);
+printf("Time taken: %f seconds\n", time_taken);
+
+break;
+
+case 3:
+
+
+n = sizeof(num) / sizeof(num[0]);
+printf("Original array: ");
+printArray(num, n);
+
+start = clock();
+mergeSort(num, 0, n - 1);
+end = clock();
+time_taken = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+printf("Sorted array: "); printArray(num, n);
+printf("Time taken: %f seconds\n", time_taken);
+
+break;
+
+case 4:
+
+n = sizeof(num)/sizeof(num[0]);
+
+printf("Original array: ");
+printArray(num, n);
+
+start = clock();
+insertionSort(num, n);
+end = clock();
+time_taken = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+printf("Sorted array: ");
+printArray(num, n);
+printf("Time taken: %f seconds\n", time_taken);
+
+break;
+
+case 5:
+
+n = sizeof(num) / sizeof(num[0]);
+printf("Original array: ");
+printArray(num, n);
+
+start = clock();
+selectionSort(num, n);
+end = clock();
+time_taken = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+printf("Sorted array: ");
+printArray(num, n);
+printf("Time taken: %f seconds\n", time_taken);
+
+break;
+
+case 6:
+
+n = sizeof(num) / sizeof(num[0]);
+
+start = clock();
+heapSort(num, n);
+end = clock();
+time_taken = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+printf("Sorted array: ");
+printArray(num, n);
+printf("Time taken: %f seconds\n", time_taken);
+
+break;
+
+case 7:
+
+printf("Goodbye!\n");
+
+break;
+
+default:
+
+printf("Invalid choice. Try again.\n");
+
+break;
+
+
+}
+printf("\n");
+}
+return 0;
+}
