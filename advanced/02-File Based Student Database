@@ -1,0 +1,119 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct Student {
+        int id;
+        char name[50];
+        float gpa;
+    };
+
+int main () {
+
+    int value;
+    int choice = 0;
+
+   
+
+printf("Welcome to the file based student database\n");
+
+while(choice != 4) {
+
+printf("1. Add a student\n");
+printf("2. View all students\n");
+printf("3. Search for a student\n");
+printf("4. Exit\n");
+printf("Select an option: ");
+scanf("%d", &choice);
+
+switch(choice) {
+
+case 1: 
+
+struct Student s1 = {};
+
+printf("Ok awesome to add a student I do need some basic info\n");
+printf("What is the students ID number?\n");
+scanf("%d", &s1.id);
+getchar();
+printf("Awesome! Now can I have their name?\n");
+fgets(s1.name, sizeof(s1.name), stdin);
+s1.name[strcspn(s1.name, "\n")] = '\0';
+printf("Lastly, what is their gpa? ");
+scanf("%f", &s1.gpa);     
+
+FILE *fp = fopen("students.txt", "a");
+if (fp == NULL) {
+    printf("Could not open file\n");
+    break;
+}
+fprintf(fp, "%d %s %.2f\n", s1.id, s1.name, s1.gpa);
+fclose(fp);
+
+printf("Student added.\n");
+
+
+
+break;
+
+case 2: {
+FILE *fp = fopen("students.txt", "r");
+if (fp == NULL) {
+printf("No records found yet.\n");
+break;
+}
+
+struct Student s;
+printf("\n--- All Students ---\n");
+while (fscanf(fp, "%d %49s %f", &s.id, s.name, &s.gpa) == 3) {
+printf("ID: %d | Name: %s | GPA: %.2f\n", s.id, s.name, s.gpa);
+}
+
+fclose(fp);
+break;
+}
+
+case 3: {
+int targetId;
+printf("Enter student ID to search: ");
+scanf("%d", &targetId);
+
+FILE *fp = fopen("students.txt", "r");
+if (fp == NULL) {
+printf("No records found yet.\n");
+break;
+}
+
+struct Student s;
+int found = 0;
+
+while (fscanf(fp, "%d %49s %f", &s.id, s.name, &s.gpa) == 3) {
+if (s.id == targetId) {
+printf("Found: ID: %d | Name: %s | GPA: %.2f\n", s.id, s.name, s.gpa);
+found = 1;
+break;
+}
+}
+
+fclose(fp);
+
+if (!found) {
+printf("Student with ID %d not found.\n", targetId);
+}
+
+break;
+}
+
+
+case 4: 
+printf("Goodbye!\n"); 
+break;
+
+default: 
+printf("Invalid option\n");
+break;
+
+}
+    }
+    return 0;
+    }
